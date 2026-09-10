@@ -1,0 +1,11 @@
+include:
+  - board: seeeduino_xiao_ble
+    shield: circa40_left
+    artifact-name: circa40-left
+  - board: seeeduino_xiao_ble
+    shield: circa40_right
+    artifact-name: circa40-right-central
+  - board: seeeduino_xiao_ble
+    shield: settings_reset
+    artifact-name: circa40-settings-reset
+

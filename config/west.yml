@@ -1,0 +1,18 @@
+manifest:
+  remotes:
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+    - name: badjeff
+      url-base: https://github.com/badjeff
+  projects:
+    - name: zmk
+      remote: zmkfirmware
+      revision: v0.3.0
+      import: app/west.yml
+    - name: zmk-pmw3610-driver
+      remote: badjeff
+      # Pinned zmk-0.3 driver; main uses a different binding.
+      revision: 5c5af40de4d8cdf55dc63c4c5907af1e52da6a95
+  self:
+    path: config
+

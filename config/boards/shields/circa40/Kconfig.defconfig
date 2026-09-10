@@ -1,0 +1,17 @@
+if SHIELD_CIRCA40_LEFT || SHIELD_CIRCA40_RIGHT
+
+config ZMK_SPLIT
+    default y
+
+endif
+
+if SHIELD_CIRCA40_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "Circa40"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif
+
