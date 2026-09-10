@@ -1,36 +1,47 @@
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/keys.h>
 
 / {
     keymap {
         compatible = "zmk,keymap";
+
         base {
             display-name = "QWERTY";
             bindings = <
-                &kp TAB   &kp Q &kp W &kp E &kp R &kp T     &kp Y &kp U &kp I &kp O &kp P &kp BSPC
-                &kp LCTRL &kp A &kp S &kp D &kp F &kp G     &kp H &kp J &kp K &kp L &kp RET
-                &kp LSHFT &kp Z &kp X &kp C &kp V           &kp B &kp N &kp M &kp COMMA &kp DOT &kp SLASH
-                &kp ESC &kp LGUI &lt 1 SPACE &kp LALT       &mkp MB2 &lt 2 SPACE &kp SPACE &mkp MB1 &kp RET
+&kp TAB    &kp Q         &kp W     &kp E        &kp R             &kp T    &kp Y          &kp U        &kp I   &kp O             &kp P      &kp DEL
+&kp LCTRL  &kp A         &kp S     &kp D        &kp F             &kp G    &kp H          &kp J        &kp K   &kp L             &kp MINUS
+&kp LSHFT  &kp Z         &kp X     &kp C        &kp V                      &kp B          &kp N        &kp M   &kp COMMA         &kp DOT    &kp SLASH
+           &kp LEFT_ALT  &kp LGUI  &lt 2 SPACE  &lt 3 LANGUAGE_1           &kp BACKSPACE  &lt 3 ENTER  &trans  &lt 3 LANGUAGE_2  &kp RET
             >;
         };
+
         numbers {
             display-name = "NUM";
             bindings = <
-                &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp DEL
-                &trans &kp F1 &kp F2 &kp F3 &kp F4 &kp F5   &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp SQT
-                &trans &kp F6 &kp F7 &kp F8 &kp F9          &kp F10 &kp F11 &kp F12 &kp LBKT &kp RBKT &kp BSLH
-                &trans &trans &trans &trans                &trans &trans &trans &kp MINUS &kp EQUAL
+&kp GRAVE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5    &kp N6    &kp N7    &kp N8   &kp N9     &kp N0     &kp DEL
+&trans     &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT  &kp SQT
+&trans     &kp F6  &kp F7  &kp F8  &kp F9            &kp F10   &kp F11   &kp F12  &kp LBKT   &kp RBKT   &kp BSLH
+           &trans  &trans  &trans  &trans            &trans    &trans    &trans   &kp MINUS  &kp EQUAL
             >;
         };
+
+        layer_3 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
         system {
             display-name = "SYS";
             bindings = <
-                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans &trans &trans &trans &trans &trans
-                &trans &kp HOME &kp PG_DN &kp PG_UP &kp END &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans          &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans                &trans &trans &trans &trans &trans
+&bt BT_CLR      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans  &trans  &trans  &trans      &trans       &trans
+&bootloader     &sys_reset    &trans        &trans        &trans        &trans          &trans  &trans  &trans  &sys_reset  &bootloader
+&studio_unlock  &trans        &trans        &trans        &trans                        &trans  &trans  &trans  &trans      &trans       &trans
+                &trans        &trans        &trans        &trans                        &trans  &trans  &trans  &trans      &trans
             >;
         };
     };
