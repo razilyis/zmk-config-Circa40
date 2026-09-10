@@ -5,14 +5,18 @@ manifest:
     - name: badjeff
       url-base: https://github.com/badjeff
   projects:
+    # ZMK v0.4 は未リリースのため、Zephyr 4.1 を含む main を SHA で pin する。
+    # v0.4.0 がタグされたら revision: v0.4.0 に差し替えるだけでよい
+    # （Zephyr は v4.1.0+zmk-fixes のまま変わらないので再移行は不要）。
     - name: zmk
       remote: zmkfirmware
-      revision: v0.3.0
+      revision: 641514a97db345f499dd50b0360e594270f008fe
       import: app/west.yml
+    # badjeff/main の pin。zmk-0.4 ブランチは pmw3610_devs[] の compat
+    # リネーム漏れ（a1a0f35 で修正）が残っており、アイドル遷移時に
+    # pmw3610_set_performance() が呼ばれなくなるため採用しない。
     - name: zmk-pmw3610-driver
       remote: badjeff
-      # Pinned zmk-0.3 driver; main uses a different binding.
-      revision: 5c5af40de4d8cdf55dc63c4c5907af1e52da6a95
+      revision: 44b4a76b74d293a93cec4ccb7e04cb8d29c10f93
   self:
     path: config
-
