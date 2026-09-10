@@ -1,5 +1,6 @@
 """Run with KiCad's Python: verify_pcb.py path/to/Circa40.kicad_pcb."""
 import pathlib
+import json
 import re
 import sys
 
@@ -38,4 +39,28 @@ expected_pads = {
 for ref, expected in expected_pads.items():
     found = pads(ref)
     assert all(found[pin] == net for pin, net in expected.items()), ref
-print("PASS: 43 matrix positions, diode direction, MCU pad nets, and all keymap layer sizes")
+layout = json.loads((root / "config/circa40.json").read_text())["layouts"]["default_transform"]["layout"]
+assert len(layout) == len(order)
+assert len({(key["row"], key["col"]) for key in layout}) == len(order)
+origin = footprints["SW1"].GetPosition()
+for key, number, (row, _) in zip(layout, order, actual):
+    assert key["label"] == f"SW{number}", key
+    assert key["row"] == row, key
+    assert key.get("w", 1) == (1.5 if number == 45 else 1), key
+    position = footprints[f"SW{number}"].GetPosition()
+    # Editor coordinates are top-left corners in 19.05 mm units. GPIO/footprint
+    # orientation is not keycap rotation; all visible keys are axis-aligned.
+    x = pcbnew.ToMM(position.x - origin.x) / 19.05
+    y = pcbnew.ToMM(position.y - origin.y) / 19.05
+    assert abs(key["x"] + (key.get("w", 1) - 1) / 2 - x) < 1e-4, key
+    assert abs(key["y"] - y) < 1e-4, key
+for row in range(4):
+    left = [key for key, number in zip(layout, order) if key["row"] == row and number <= 21]
+    right = [key for key, number in zip(layout, order) if key["row"] == row and number > 21]
+    assert min(key["x"] for key in right) - max(key["x"] + key.get("w", 1) for key in left) >= 1
+for i, key in enumerate(layout):
+    for other in layout[i + 1:]:
+        dx = min(key["x"] + key.get("w", 1), other["x"] + other.get("w", 1)) - max(key["x"], other["x"])
+        dy = min(key["y"] + key.get("h", 1), other["y"] + other.get("h", 1)) - max(key["y"], other["y"])
+        assert dx <= 1e-6 or dy <= 1e-6, (key, other)
+print("PASS: 43 matrix positions, diode direction, MCU pad nets, all keymap layers, and split editor layout/PCB coordinates")

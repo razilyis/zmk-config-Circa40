@@ -32,6 +32,17 @@ SW18 SW19 SW20 SW21          SW39 SW40 SW45 SW41 SW42
 SW39は右クリック、SW41は左クリック、SW42はEnter。SW45は実装した場合Spaceです。
 SYSレイヤーのSW2〜SW6でBluetoothプロファイル0〜4を選択、SW1で選択中プロファイルをクリアします。
 
+## Keymap Editorの表示
+
+`config/circa40.json` が [Keymap Editor](https://nickcoutsos.github.io/keymap-editor/) 用の表示レイアウトです。
+`circa40.keymap` と同名のJSONなので、GitHub連携で読み込まれます。更新後はエディターを再読み込みし、このリポジトリの最新の `main` を選択してください。
+左右21/22キーの間隔と行のずれはPCB中心座標から19.05 mm単位に換算しています。SW45のみ指定された1.5U、それ以外は1Uの編集用表示です。
+配列の順番は `circa40.dtsi` の43位置と一致し、SW45をトラボのために未実装にする場合も位置を削除しません。
+JSON内の `row` / `col` はエディターの表示・整形用です。GPIOやマトリクスの列番号ではありません。
+このJSONを変更してもファームウェアの左右通信設定やキー割り当ては変わりません。
+
+KiCad付属Pythonで `tools/verify_pcb.py ../Circa40.kicad_pcb` を実行すると、マトリクスと表示順・PCB位置・左右の間隔・キーの重なりを確認できます。
+
 ## 基板との対応
 
 2026-09-10の`Circa40.kicad_pcb`と回路図のラベルを照合。左右はGPIO配置が異なるため、overlayを交換しないでください。
