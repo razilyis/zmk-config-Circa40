@@ -1,5 +1,7 @@
 #include "circa40.dtsi"
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <dt-bindings/zmk/input_transform.h>
+#include <input/processors.dtsi>
 #include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
 
 &default_transform { col-offset = <6>; };
@@ -58,9 +60,23 @@
 };
 
 / {
-    trackball_listener {
+    trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+
+        /* NUM レイヤー (circa40.keymap の numbers = レイヤー 1) の間だけ、
+         * カーソル移動をホイールスクロールに変換する。
+         * zip_xy_to_scroll_mapper: REL_Y -> WHEEL, REL_X -> HWHEEL
+         * zip_scroll_scaler <倍率> <除数>: 1/45 に減速（端数は繰り越される）。
+         *   速すぎ/遅すぎる場合は除数だけ変更する（大きいほど遅い）。
+         * スクロール方向が逆に感じる場合は、mapper の前に
+         *   <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,
+         * を追加する（X も反転するなら INPUT_TRANSFORM_X_INVERT を OR する）。 */
+        scroll-layer {
+            layers = <1>;
+            input-processors = <&zip_xy_to_scroll_mapper>,
+                               <&zip_scroll_scaler 1 45>;
+        };
     };
 };
 
