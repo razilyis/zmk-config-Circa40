@@ -13,5 +13,8 @@ include:
   # 通常運用では使わない（USB 接続前提・電池消費が増える）。
   - board: xiao_ble//zmk
     shield: circa40_right
-    cmake-args: -DCONFIG_ZMK_USB_LOGGING=y
+    cmake-args: >-
+      -DCONFIG_ZMK_USB_LOGGING=y
+      -DCONFIG_USB_CDC_ACM_RINGBUF_SIZE=16384
+      -DCONFIG_ZMK_LOG_LEVEL_WRN=y
     artifact-name: circa40-right-logging
