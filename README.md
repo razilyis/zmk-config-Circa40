@@ -1,7 +1,9 @@
 # zmk-config-Circa40
 
 Circa40（XIAO nRF52840 Plus）のZMK設定です。**右手がCentral、左手がPeripheral**です。
-ビルドはGitHub Actionsのみで行います。ZMK v0.3.0と、それに対応するPMW3610ドライバのコミットを固定しています。
+ビルドはGitHub Actionsのみで行います。ZMKは`main`（Zephyr 4.1）を、PMW3610ドライバはZephyr 4.1対応版を、
+それぞれコミットSHAで固定しています。ZMK v0.4は未リリースのため、タグではなく`main`をpinしています。
+v0.4.0が出たら`config/west.yml`の`revision`をタグに差し替えるだけで済みます（Zephyrのバージョンは変わりません）。
 
 ## ビルドと書き込み
 
@@ -11,6 +13,7 @@ Circa40（XIAO nRF52840 Plus）のZMK設定です。**右手がCentral、左手�
 - `circa40-left.uf2`：左手
 - `circa40-right-central.uf2`：右手（USB/Bluetoothの接続先）
 - `circa40-settings-reset.uf2`：ペアリング情報の初期化専用。通常は書き込みません。
+- `circa40-right-logging.uf2`：切り分け用。右手にUSB接続してドライバのログをシリアル出力します。通常は書き込みません。
 
 XIAOをブートローダーモードにして、対応するUF2をコピーします。初回は左右とも書き込み、両方の電源を入れます。
 既存のZMK設定から移行して左右がつながらない場合は、左右それぞれにsettings-resetを書いた後、対応する通常ファームウェアを書き直してください。
@@ -56,13 +59,21 @@ KiCad付属Pythonで `tools/verify_pcb.py ../Circa40.kicad_pcb` を実行する�
 
 右J1：1=GND、2=MOTION(P1.15)、3=SDIO(P1.07)、4=CS(P1.05)、5=SCLK(P1.03)、6=3.3V。
 PMW3610は3線式SPIでMOSI/MISOをSDIOに共用。初期600 CPIです。
-向きは実機確認後、右overlayの`trackball`に`swap-xy`、`invert-x`、`invert-y`を追加して調整します。
+
+> **FFCケーブルはAタイプ（両端の接点が同じ面）を使用してください。**
+> Bタイプを挿すとJ1のピン順が1↔6で反転し、GNDと3.3Vが入れ替わって電源逆接になります。
+> 実機ブリングアップ時にこれをやってセンサーが応答しなくなりました（Aタイプへ交換して復旧、センサーは無事）。
+
+向きは実機確認の結果、`swap-xy`のみで4方向とも正しくなりました（`invert-x`/`invert-y`は不要）。
+右overlayの`trackball`に設定済みです。
 電源スイッチSW43/SW44はハードウェアで電池を切断するもので、キーマップには含みません。
 
 ## 注意
 
-Actions成功はコンパイル確認です。実機のキー入力・左右通信・センサーの動作と方向・消費電流は別途確認が必要です。
+Actions成功はコンパイル確認です。実機では**キー入力・バッテリー測定・トラックボールの動作と方向**を確認済みです。
+**左右のBluetooth通信と消費電流は未確認**です。
+Kconfigの指定ミスは警告なく無視されるため、設定を変えたときはActionsログの`.config`ダンプで実効値を確認してください。
 この設定はPlusの追加GPIOを使用します。通常のXIAO nRF52840の端子配置とは異なります。
 基板/CAD本体はこのリポジトリへコピーしていません。
 
-参照：[ZMK](https://github.com/zmkfirmware/zmk/tree/v0.3.0)、[PMW3610ドライバ](https://github.com/badjeff/zmk-pmw3610-driver/tree/5c5af40de4d8cdf55dc63c4c5907af1e52da6a95)。
+参照：[ZMK](https://github.com/zmkfirmware/zmk/tree/641514a97db345f499dd50b0360e594270f008fe)、[PMW3610ドライバ](https://github.com/badjeff/zmk-pmw3610-driver/tree/44b4a76b74d293a93cec4ccb7e04cb8d29c10f93)、[Zephyr 4.1移行の解説](https://zmk.dev/blog/2025/12/09/zephyr-4-1)。
