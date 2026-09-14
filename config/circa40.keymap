@@ -29,19 +29,19 @@
         base {
             display-name = "QWERTY";
             bindings = <
-&kp TAB    &kp Q         &kp W     &kp E        &kp R             &kp T    &kp Y          &kp U        &kp I   &kp O             &kp P         &kp DEL
-&kp LCTRL  &kp A         &kp S     &kp D        &kp F             &kp G    &kp H          &kp J        &kp K   &kp L             &kp MINUS
-&kp LSHFT  &kp Z         &kp X     &kp C        &kp V                      &kp B          &kp N        &kp M   &kp COMMA         &kp DOT       &kp SLASH
-           &kp LEFT_ALT  &kp LGUI  &lt 1 SPACE  &lt 3 LANGUAGE_1           &kp BACKSPACE  &lt 2 ENTER  &trans  &lt 4 LANGUAGE_2  &kp LEFT_ALT
+&kp TAB    &kp Q         &kp W     &kp E        &kp R        &kp T    &kp Y          &kp U        &kp I   &kp O             &kp P         &kp DEL
+&kp LCTRL  &kp A         &kp S     &kp D        &kp F        &kp G    &kp H          &kp J        &kp K   &kp L             &kp MINUS
+&kp LSHFT  &kp Z         &kp X     &kp C        &kp V                 &kp B          &kp N        &kp M   &kp COMMA         &kp DOT       &kp SLASH
+           &kp LEFT_ALT  &kp LGUI  &lt 1 SPACE  &lt 3 SPACE           &kp BACKSPACE  &lt 2 ENTER  &trans  &lt 4 LANGUAGE_2  &kp LEFT_ALT
             >;
         };
 
         numbers {
             display-name = "NUM";
             bindings = <
-&kp GRAVE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5    &kp N6    &kp N7    &kp N8   &kp N9     &kp N0     &kp DEL
-&trans     &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT  &kp SQT
-&trans     &kp F6  &kp F7  &kp F8  &kp F9            &kp F10   &kp F11   &kp F12  &kp LBKT   &kp RBKT   &kp BSLH
+&kp GRAVE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5    &kp N6    &kp N7    &kp N8   &kp N9     &kp N0       &kp DEL
+&trans     &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT  &kp AT_SIGN
+&trans     &kp F6  &kp F7  &kp F8  &kp F9            &kp F10   &kp F11   &kp F12  &kp LBKT   &kp RBKT     &kp BSLH
            &trans  &trans  &trans  &trans            &trans    &trans    &trans   &kp MINUS  &kp EQUAL
             >;
         };
