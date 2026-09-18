@@ -48,10 +48,10 @@
 
         COMMON {
             bindings = <
-&trans  &trans              &kp LG(DOWN_ARROW)   &kp LG(UP_ARROW)        &kp LG(LC(D))            &trans    &kp LC(T)        &kp LA(LEFT_ARROW)  &kp UP_ARROW    &kp LA(RIGHT_ARROW)  &kp PAGE_UP    &kp LC(W)
-&trans  &kp LG(LEFT_ARROW)  &kp LG(RIGHT_ARROW)  &kp LC(LG(LEFT_ARROW))  &kp LC(LG(RIGHT_ARROW))  &trans    &kp LC(PAGE_UP)  &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW      &kp PAGE_DOWN
-&trans  &trans              &trans               &trans                  &kp LC(LG(F4))                     &trans           &kp LC(PAGE_UP)     &trans          &trans               &trans         &trans
-        &trans              &trans               &trans                  &trans                             &trans           &trans              &trans          &trans               &trans
+&trans  &trans              &kp LG(DOWN_ARROW)   &kp LG(UP_ARROW)         &kp LG(LC(D))            &trans    &kp LC(T)        &kp LA(LEFT_ARROW)  &kp UP_ARROW    &kp LA(RIGHT_ARROW)  &kp PAGE_UP    &kp LC(W)
+&trans  &kp LG(LEFT_ARROW)  &kp LG(RIGHT_ARROW)  &kp LC(LG(LEFT_ARROW))   &kp LC(LG(RIGHT_ARROW))  &trans    &kp LC(PAGE_UP)  &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW      &kp PAGE_DOWN
+&trans  &trans              &trans               &trans                   &kp LC(LG(F4))                     &trans           &kp LC(PAGE_UP)     &trans          &trans               &trans         &trans
+        &trans              &trans               &kp LS(LG(RIGHT_ARROW))  &kp LG(E)                          &trans           &trans              &trans          &trans               &trans
             >;
         };
 
