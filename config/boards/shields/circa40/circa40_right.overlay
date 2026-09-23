@@ -50,6 +50,7 @@
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio1 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <600>;
+        force-awake;
         /* 実機確認: ボール上→カーソル左、ボール右→カーソル下 だったため
          * X/Y の入れ替えのみで 4 方向とも正しい向きになる（反転は不要）。 */
         swap-xy;
