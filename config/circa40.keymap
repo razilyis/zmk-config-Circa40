@@ -32,17 +32,7 @@
 &kp TAB    &kp Q         &kp W     &kp E        &kp R        &kp T    &kp Y          &kp U        &kp I   &kp O             &kp P         &kp DEL
 &kp LCTRL  &kp A         &kp S     &kp D        &kp F        &kp G    &kp H          &kp J        &kp K   &kp L             &kp MINUS
 &kp LSHFT  &kp Z         &kp X     &kp C        &kp V                 &kp B          &kp N        &kp M   &kp COMMA         &kp DOT       &kp SLASH
-           &kp LEFT_ALT  &kp LGUI  &lt 1 SPACE  &lt 3 SPACE           &kp BACKSPACE  &lt 2 ENTER  &trans  &lt 4 LANGUAGE_2  &kp LEFT_ALT
-            >;
-        };
-
-        numbers {
-            display-name = "NUM";
-            bindings = <
-&kp GRAVE        &kp N1   &kp N2   &kp N3   &kp N4  &kp N5    &kp N6     &kp N7                &kp N8                 &kp N9     &kp N0       &kp DEL
-&kp QUESTION     &kp F1   &kp F2   &kp F3   &kp F4  &kp F5    &kp PLUS   &kp MINUS             &kp ASTRK              &kp SLASH  &kp AT_SIGN
-&kp EXCLAMATION  &kp F6   &kp F7   &kp F8   &kp F9            &kp COLON  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LBKT   &kp RBKT     &kp BSLH
-                 &kp F10  &kp F11  &kp F12  &trans            &trans     &trans                &trans                 &kp HASH   &kp EQUAL
+           &kp LEFT_ALT  &kp LGUI  &lt 1 SPACE  &lt 3 SPACE           &kp BACKSPACE  &lt 2 ENTER  &trans  &lt 5 LANGUAGE_2  &kp LEFT_ALT
             >;
         };
 
@@ -61,6 +51,25 @@
 &trans     &trans     &trans     &trans     &trans     &trans           &trans  &mkp MB1  &trans    &mkp MB2  &trans
 &trans     &trans     &trans     &trans     &trans                      &trans  &trans    &trans    &trans    &trans  &trans
            &trans     &trans     &trans     &trans                      &trans  &trans    &trans    &trans    &trans
+            >;
+        };
+
+        numbers {
+            display-name = "NUM";
+            bindings = <
+&kp GRAVE        &kp N1   &kp N2   &kp N3   &kp N4  &kp N5    &kp N6     &kp N7                &kp N8                 &kp N9     &kp N0       &kp DEL
+&kp QUESTION     &kp F1   &kp F2   &kp F3   &kp F4  &kp F5    &kp PLUS   &kp MINUS             &kp ASTRK              &kp SLASH  &kp AT_SIGN
+&kp EXCLAMATION  &kp F6   &kp F7   &kp F8   &kp F9            &kp COLON  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LBKT   &kp RBKT     &kp BSLH
+                 &kp F10  &kp F11  &kp F12  &trans            &trans     &trans                &trans                 &kp HASH   &kp EQUAL
+            >;
+        };
+
+        AML {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans
             >;
         };
 
