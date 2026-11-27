@@ -1,5 +1,19 @@
 # 作業履歴
 
+## 2026-11-27 Bluetooth 安定化設定を AroundFortyRB から移植
+- 理由: 左手が反応しなくなる症状の対策。AroundFortyRB で使っている BLE 安定化設定を試す。
+- 変更: `circa40.conf`（左右共通）に BLE 試験的機能無効、BT RX/HCI TX スタック、ACL 251、接続間隔 15ms 固定、2M PHY 無効、接続数上限 6、BLE/低優先度スタックを追加。`circa40_left.conf` に Split Peripheral スタック、`circa40_right.conf` に送信出力 +8dBm、Split Central スタック、Input スタックを追加。
+- 移植しなかったもの: スリープ設定（Circa40 は 11/12 に無効化済み）、RGB LED、ヒープ、ZMK Studio、キーボード名、バッテリー代理表示。
+- 確認: Actions のビルドと `.config` ダンプでの実効値。実機検証は未実施。
+- 次の一手: 左右とも書き込み（設定が変わるので念のため settings-reset → 通常ファーム）、数日使って左手の切断が出るか確認。
+
+## 2026-11-27 オートマウス・スクロールのレイヤー番号を修正
+- 理由: Keymap Editorでレイヤー順が変わり、overlayの番号が実際の並び（0 QWERTY / 1 COMMON / 2 FUNCTION / 3 NUM / 4 AML / 5 SYS）とずれていた。ボール操作でNUMがオンになり、スクロールがCOMMONで効く状態だった。
+- 変更: `circa40_right.overlay` の `zip_temp_layer` を 3→2（FUNCTION）、`scroll-layer` の `layers` を 1→3（NUM）に変更。コメントも更新。README の配列説明を現在のキーマップに合わせて書き直し。
+- 影響: `circa40_right`（Central）のみ。キーマップ自体と左手の変更なし。
+- 確認: Actionsのビルド。実機検証は未実施。
+- 次の一手: 右手を書き込み、ボールを動かすとFUNCTION（クリック）になること、NUMホールド中にスクロールになることを確認。
+
 ## 2026-11-12 ディープスリープ無効化
 - 理由: 左側が反応しなくなる症状の切り分けと、ディープスリープ不要の要望に対応。
 - 変更: `config/circa40.conf` の `CONFIG_ZMK_SLEEP` を `y` → `n` に変更し、不要な `CONFIG_ZMK_IDLE_SLEEP_TIMEOUT=900000` を削除。
