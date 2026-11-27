@@ -31,9 +31,30 @@ SW13 SW14 SW15 SW16 SW17     SW33 SW34 SW35 SW36 SW37 SW38
 SW18 SW19 SW20 SW21          SW39 SW40 SW45 SW41 SW42
 ```
 
-初期配列はQWERTY。SW20はタップSpace／ホールドNUM、SW40はタップSpace／ホールドSYSです。
-SW39は右クリック、SW41は左クリック、SW42はEnter。SW45は実装した場合Spaceです。
+レイヤーは `circa40.keymap` の並び順で 0 QWERTY / 1 COMMON / 2 FUNCTION / 3 NUM / 4 AML / 5 SYS です。
+
+初期配列はQWERTY。親指列は次のとおりです。
+
+|キー|タップ|ホールド|
+|---|---|---|
+|SW18|Alt|-|
+|SW19|GUI|-|
+|SW20|Space|COMMON（1）|
+|SW21|Space|NUM（3）|
+|SW39|Backspace|-|
+|SW40|Enter|FUNCTION（2）|
+|SW45|割り当てなし（未実装でも位置は残す）|-|
+|SW41|LANG2|SYS（5）|
+|SW42|Alt|-|
+
+コンボは Q+W で Esc、D+F で LANG1、J+K で LANG2 です。
+FUNCTIONレイヤーには右手にマウスボタン（SW24=中クリック、SW29=左クリック、SW31=右クリック）があります。
+トラックボールを動かすとFUNCTIONレイヤーが自動でオンになり（オートマウスレイヤー）、動きが止まって500ms後にオフに戻ります。
+NUMレイヤーを押している間はトラックボールがスクロールになります。
 SYSレイヤーのSW2〜SW6でBluetoothプロファイル0〜4を選択、SW1で選択中プロファイルをクリアします。
+
+> Keymap Editorでレイヤーを並べ替えると番号がずれます。その場合は `circa40_right.overlay` の
+> `zip_temp_layer`（FUNCTIONの番号）と `scroll-layer` の `layers`（NUMの番号）も合わせてください。
 
 ## Keymap Editorの表示
 

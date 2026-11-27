@@ -60,10 +60,14 @@
     };
 };
 
+/* レイヤー番号は circa40.keymap の並び順（0 QWERTY / 1 COMMON / 2 FUNCTION /
+ * 3 NUM / 4 AML / 5 SYS）に依存する。Keymap Editor でレイヤーを並べ替えたら
+ * 下の zip_temp_layer と scroll-layer の番号も必ず合わせること。 */
+
 /* デフォルトの zip_temp_layer ノードを拡張:
  * - require-prior-idle-ms: 直前のキー入力から 150ms 以上経っていないと
  *   AML を発動させない（タイプ中に手のひらがボールへ軽く触れた程度の誤発動を防ぐ）。
- * - excluded-positions: FUNCTION レイヤー (circa40.keymap の3番目 = レイヤー3) の
+ * - excluded-positions: FUNCTION レイヤー (circa40.keymap の3番目 = レイヤー2) の
  *   mkp MB3(8) / MB1(19) / MB2(21) の位置。この3キー以外が押されたらタイムアウト前でも
  *   即座にAML終了、この3キー（クリック自身）を押してもAMLは維持される。
  *   位置番号は circa40.dtsi の matrix-transform 順（0始まり、行ごとに連番）。 */
@@ -77,13 +81,13 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* Auto Mouse Layer: ボールが動いた瞬間に FUNCTION レイヤー(3, MB1/2/3)を
+        /* Auto Mouse Layer: ボールが動いた瞬間に FUNCTION レイヤー(2, MB1/2/3)を
          * 自動オンにし、動きが無くなってから 500ms 後に自動オフに戻す。
-         * 手動ホールド (&lt 3 SPACE) との併用可。タイミングが合わなければ
+         * 手動ホールド (&lt 2 ENTER) との併用可。タイミングが合わなければ
          * 500 の数値だけ調整する（大きいほど戻るまで長く留まる）。 */
-        input-processors = <&zip_temp_layer 3 500>;
+        input-processors = <&zip_temp_layer 2 500>;
 
-        /* NUM レイヤー (circa40.keymap の numbers = レイヤー 1) の間だけ、
+        /* NUM レイヤー (circa40.keymap の numbers = レイヤー 3) の間だけ、
          * カーソル移動をホイールスクロールに変換する。
          * zip_xy_to_scroll_mapper: REL_Y -> WHEEL, REL_X -> HWHEEL
          * zip_scroll_scaler <倍率> <除数>: 1/45 に減速（端数は繰り越される）。
@@ -92,7 +96,7 @@
          *   <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,
          * を追加する（X も反転するなら INPUT_TRANSFORM_X_INVERT を OR する）。 */
         scroll-layer {
-            layers = <1>;
+            layers = <3>;
             input-processors = <&zip_xy_to_scroll_mapper>,
                                <&zip_scroll_scaler 1 45>;
         };
